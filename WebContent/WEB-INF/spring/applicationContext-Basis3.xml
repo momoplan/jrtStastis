@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+ 
+	<bean id="dataSource3" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+			<property name="driverClassName" value="${client.db.driver}" />
+		<property name="url" value="${client.db.url}" />
+		<property name="username" value="${client.db.username}" />
+		<property name="password" value="${client.db.password}" /> 
+	</bean>
+
+	<bean id="sessionFactory3"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource3" />
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>com/ruicai/basis/entity/ClientZjlTJ.hbm.xml</value>
+				<value>com/ruicai/basis/entity/Tbl_userinfo.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.hbm2ddl.auto">none</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- Transaction manager for a single Hibernate SessionFactory (alternative 
+		to JTA) -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory3" />
+	</bean>
+
+	<bean id="transactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="del*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="save*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="atta*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<!-- <bean id="autoproxy" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"> -->
+		<property name="beanNames">
+			<!-- <ref local="personDAO"/> -->
+			<list>
+				<value>*Manage</value>
+				<value>*DAO</value>
+			</list>
+			<!-- <list> <value>CorpManage</value> <value>CorpDAO</value> </list> -->
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>transactionInterceptor</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean
+		class="org.springframework.transaction.interceptor.TransactionAttributeSourceAdvisor">
+		<property name="transactionInterceptor" ref="transactionInterceptor">
+		</property>
+	</bean>
+
+	<bean id="SpringContextUtil" class="com.ruicai.basis.common.SpringContextUtil"
+		scope="singleton" lazy-init="false">
+	</bean>
+
+</beans>

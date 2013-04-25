@@ -1,0 +1,120 @@
+.flyoutMenu {
+	background-color: #F1F1F1;
+	border-color: #999999;
+	border-width: 0 1px 1px 0;
+	border-style: solid;
+	
+}
+.flyoutMenu1 {
+	background-color: #F1F1F1;
+	border-color: #999999;
+	border-width: 1px 1px 1px 1px;
+	border-style: solid;
+	
+}
+
+.handle {BORDER-BOTTOM: buttonshadow 1px solid; BORDER-LEFT: buttonhighlight 1px solid; BORDER-RIGHT: buttonshadow 1px solid; BORDER-TOP: buttonhighlight 1px solid; HEIGHT: 18; MARGIN-LEFT: 1px; MARGIN-RIGHT: 3px; WIDTH: 3px}
+.flyoutLink  {
+	border-color: #F1F1F1;
+	border-width: 1px;
+	border-style: solid;
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 70%;
+	padding-left: 6px;
+	padding-right: 25px;
+	padding-top: 1px;
+	cursor: hand;
+}
+.flyoutMenu TD.flyoutLink  {
+	border-color: #F1F1F1;
+	border-width: 1px;
+	border-style: solid;
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 70%;
+	padding: 1px 25px 3px 6px;
+	cursor: hand;
+}
+.flyoutLink a {
+	color: black;
+	text-decoration: none;
+}
+.flyoutLink a:hover {
+	color: black;
+	text-decoration: none;
+}
+.flyoutLink a:visited {
+	color: black;
+	text-decoration: none;
+}
+.flyoutLink a:active {
+	color: black;
+	text-decoration: none;
+}
+.flyoutSubHeading {
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 70%;
+	background-color: #F1F1F1;
+	font-weight: bold;
+	padding-top: 2px;
+	padding-bottom: 4px;
+	padding-left: 7px;
+	cursor: default;
+}
+.flyoutSubLink {
+	border-color: #F1F1F1;
+	border-width: 1px;
+	border-style: solid;
+	font-family: Verdana, Arial, Helvetica;
+	font-size: 70%;
+	padding: 1px 15px 3px 11px;
+	cursor: hand;
+}
+.flyoutSubLink a {
+	color: black;
+	text-decoration: none;
+}
+.flyoutSubLink a:hover {
+	color: black;
+	text-decoration: none;
+}
+.flyoutSubLink a:visited {
+	color: black;
+	text-decoration: none;
+}
+.flyoutSubLink a:active {
+	color: black;
+	text-decoration: none;
+}
+P {FONT-FAMILY: 宋体; FONT-SIZE: 9pt}
+FONT {FONT-FAMILY: 宋体; FONT-SIZE: 9pt}
+TD {FONT-FAMILY: 宋体; FONT-SIZE: 9pt}
+INPUT {FONT-FAMILY: 宋体; FONT-SIZE: 9pt}
+SELECT {FONT-FAMILY: 宋体; FONT-SIZE: 9pt}
+OPTION {FONT-FAMILY: 宋体; FONT-SIZE: 9pt}
+TEXTAREA {FONT-FAMILY: 宋体; FONT-SIZE: 9pt}
+FORM {FONT-FAMILY: 宋体; FONT-SIZE: 9pt}
+a:link{color:#677551; text-decoration: none;}
+a:active{ text-decoration: none;color:#677551}
+a:visited{ text-decoration: none;color:#677551}
+a:hover{ text-decoration: underline;color:#000000}
+.btn{BORDER-RIGHT: #665b8e 1px solid;BORDER-TOP: #ffffff 1px solid;FONT-SIZE: 9pt;BORDER-LEFT: #ffffff 1px solid;COLOR: #000000;BORDER-BOTTOM: #665b8e 1px solid;HEIGHT: 20px;BACKGROUND-COLOR:  #DADFD0}
+.p1{font-size:9pt}
+.p9{font-size:9pt}
+.p10{font-size:10.5pt}
+.3dfont {FILTER: glow(color=#ffffff,strength=0) shadow(color=#aaaaaa,direction:135); POSITION: relative; WIDTH: 100%}
+.logo{FONT-FAMILY: 黑体; FONT-SIZE: 20pt}
+.wp2 { word-wrap:break-word;width:196;font-size:9pt}
+.p11{font-family:Verdana;font-size:9pt}
+.p99{font-famly:宋体;font-size:9pt}
+.aStyle {
+	font-family: "宋体";
+	font-size: 9pt;
+	color: #000000;
+	text-decoration: none;
+}
+.txtStyle {
+	font-family: "宋体";
+	font-size: 9pt;
+	color: #000000;
+	text-decoration: none;
+}

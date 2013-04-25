@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="index" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/index.jsp</value>
+		</property>
+	</bean>
+	
+	<bean id="webmain" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/webmain.jsp</value>
+		</property>
+	</bean>
+	<bean id="leftframe" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/leftframe.jsp</value>
+		</property>
+	</bean>
+	<bean id="findpass" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/pass/findpass.jsp</value>
+		</property>
+	</bean>
+    
+    <!-- 数据统计/业务推广PV (all) -->
+    <bean id="pvtj_all" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/tj/pvtj.jsp</value>
+		</property>
+	</bean>
+	<!-- 数据统计/充值方式 (all) -->
+    <bean id="paytj_all" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/tj/paytj.jsp</value>
+		</property>
+	</bean>
+	    <bean id="paytj_user" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/tj/paytjuser.jsp</value>
+		</property>
+	</bean>
+	<!-- 装机量统计/装机量  -->
+	<bean id="zjl_user" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/clientTj/zljtjuser.jsp</value>
+		</property>
+	</bean>
+	<!-- 数据统计/购彩方式 (all) -->
+    <bean id="buytj_all" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/tj/buytj.jsp</value>
+		</property>
+	</bean>
+	<!-- 数据统计/用户行为 (all) -->
+    <bean id="useractiontj_all" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/tj/useraction.jsp</value>
+		</property>
+	</bean>
+	<!-- 数据统计/用户分析 (all) -->
+    <bean id="useranalysety_all" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/tj/useranalysety.jsp</value>
+		</property>
+	</bean>
+	
+	<!-- 系统管理/菜单系统管理 -->
+    <bean id="listmenu" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/sys/listmenu.jsp</value>
+		</property>
+	</bean>
+	<bean id="findmenu" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/sys/findmenu.jsp</value>
+		</property>
+	</bean>
+	<!-- 系统管理/角色管理 -->
+    <bean id="listrole" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/sys/listrole.jsp</value>
+		</property>
+	</bean>
+	<bean id="findrole" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/sys/findrole.jsp</value>
+		</property>
+	</bean>
+	<bean id="newrole" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/sys/newrole.jsp</value>
+		</property>
+	</bean>
+	
+	<!-- 业务管理/业务管理 -->
+    <bean id="listyw" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/yewu/listyw.jsp</value>
+		</property>
+	</bean>
+	<bean id="findyw" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/yewu/findyw.jsp</value>
+		</property>
+	</bean>
+	<!-- 渠道管理/渠道管理 -->
+    <bean id="listchannel" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/channel/listchannel.jsp</value>
+		</property>
+	</bean>
+    <bean id="findchanneldetail" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/channel/findchanneldetail.jsp</value>
+		</property>
+	</bean>
+	<bean id="findchannel" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/channel/findchannel.jsp</value>
+		</property>
+	</bean>
+	<bean id="newchannel" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/channel/newchannel.jsp</value>
+		</property>
+	</bean>
+	
+	<bean id="listusercfg" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/channel/listusercfg.jsp</value>
+		</property>
+	</bean>
+	<bean id="newusercfg" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/channel/newusercfg.jsp</value>
+		</property>
+	</bean>
+	<bean id="findusercfg" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/channel/findusercfg.jsp</value>
+		</property>
+	</bean>
+	
+	<bean id="findCooperate" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/channel/cooperat_list.jsp</value>
+		</property>
+	</bean>
+	<!-- 系统管理/用户管理 -->
+    <bean id="listuser" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/sys/listuser.jsp</value>
+		</property>
+	</bean>
+	<bean id="finduser" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/sys/finduser.jsp</value>
+		</property>
+	</bean>
+	<bean id="newuser" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/sys/newuser.jsp</value>
+		</property>
+	</bean>
+	<!-- 系统管理/红名单管理 -->
+    <bean id="listredtel" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/sys/listredtel.jsp</value>
+		</property>
+	</bean>
+	<bean id="findredtel" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/sys/findredtel.jsp</value>
+		</property>
+	</bean>
+	<bean id="newredtel" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/sys/newredtel.jsp</value>
+		</property>
+	</bean>
+	<!-- 用户信息查询/用户详情 -->
+    <bean id="userdt" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/userinfo/userdt.jsp</value>
+		</property>
+	</bean>
+	<bean id="usersn" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/userinfo/usersn.jsp</value>
+		</property>
+	</bean>
+	<!-- PV list -->
+    <bean id="pvlist" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/pv/listpv.jsp</value>
+		</property>
+	</bean>
+	<bean id="userlist" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/pv/userpv.jsp</value>
+		</property>
+	</bean>
+	<bean id="userlog" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/pv/userlog.jsp</value>
+		</property>
+	</bean>
+	<!-- 合作 list -->
+    <bean id="hzpvlist" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/hezuo/pvlist.jsp</value>
+		</property>
+	</bean>
+	<bean id="hzregnumlist" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/hezuo/regnumlist.jsp</value>
+		</property>
+	</bean>	
+	<bean id="buylist" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/hezuo/buylist.jsp</value>
+		</property>
+	</bean>
+	<bean id="pictureringlist" class="org.springframework.web.servlet.view.JstlView">
+		<property name="url">
+			<value>/tj/pictureringcount.jsp</value>
+		</property>
+	</bean>
+</beans>

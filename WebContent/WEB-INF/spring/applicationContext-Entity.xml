@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<!-- 注入DAO对象-->
+	<!-- 用户信息 -->
+	<bean id="UserDAO" class="com.ruicai.basis.sys.dao.impl.UserDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- 菜单信息 -->
+	<bean id="MenuDAO" class="com.ruicai.basis.sys.dao.impl.MenuDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
+	<!-- 业务推广PV -->
+	<bean id="PvTJDAO" class="com.ruicai.basis.tj.dao.impl.PvTJDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- 充值方式 -->
+	<bean id="PayTJDAO" class="com.ruicai.basis.tj.dao.impl.PayTJDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- 购彩方式 -->
+	<bean id="BuyTJDAO" class="com.ruicai.basis.tj.dao.impl.BuyTJDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- 用户行为 -->
+	<bean id="UserActionTJDAO" class="com.ruicai.basis.tj.dao.impl.UserActionTJDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+		<property name="datasource" ref="dataSource">
+		</property>
+	</bean>
+	<!-- 用户分析 -->
+	<bean id="UserAnalysetyDAO" class="com.ruicai.basis.tj.dao.impl.UserAnalysetyDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
+	<!-- 业务管理 -->
+	<bean id="YwDAO" class="com.ruicai.basis.yw.dao.impl.YwDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- 渠道管理 -->
+	<bean id="ChannelDAO" class="com.ruicai.basis.channel.dao.impl.ChannelDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UserCfgDAO" class="com.ruicai.basis.channel.dao.impl.UserCfgDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- 角色管理 -->
+	<bean id="RoleDAO" class="com.ruicai.basis.sys.dao.impl.RoleDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- 用户信息查询 -->
+	<bean id="UserInfoDAO" class="com.ruicai.basis.userinfo.dao.impl.UserInfoDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory2" />
+		</property>
+	</bean>	
+	<!-- 角色配置管理 -->
+	<bean id="RoleCfgDAO" class="com.ruicai.basis.sys.dao.impl.RoleCfgDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- 红名单管理 -->
+	<bean id="RedTelDAO" class="com.ruicai.basis.sys.dao.impl.RedTelDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- pvcount -->
+	<bean id="PVCountDAO" class="com.ruicai.basis.pv.dao.impl.PVCountDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UserLogDAO" class="com.ruicai.basis.pv.dao.impl.UserLogDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<!-- 图铃下载 -->
+	<bean id="PictureRingcountDAO" class="com.ruicai.basis.tj.dao.impl.PictureRingcountDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
+
+	<!-- 注入MANAGE业务对象 -->
+	<!-- 用户信息 -->
+	<bean id="UserManage" class="com.ruicai.basis.sys.business.impl.UserManageImpl">
+		<property name="userDAO" ref="UserDAO"></property>
+	</bean>
+	<!-- 菜单信息 -->
+	<bean id="MenuManage" class="com.ruicai.basis.sys.business.impl.MenuManageImpl">
+		<property name="menuDAO" ref="MenuDAO"></property>
+	</bean>	
+	<!-- 业务推广PV -->
+	<bean id="PvTJManage" class="com.ruicai.basis.tj.business.impl.PvTJManageImpl">
+		<property name="pvTJDAO" ref="PvTJDAO"></property>
+	</bean>
+	<!-- 充值方式 -->
+	<bean id="PayTJManage" class="com.ruicai.basis.tj.business.impl.PayTJManageImpl">
+		<property name="payTJDAO" ref="PayTJDAO"></property>
+	</bean>
+	<!-- 购彩方式 -->
+	<bean id="BuyTJManage" class="com.ruicai.basis.tj.business.impl.BuyTJManageImpl">
+		<property name="buyTJDAO" ref="BuyTJDAO"></property>
+	</bean>
+	<!-- 用户行为 -->
+	<bean id="UserActionTJManage" class="com.ruicai.basis.tj.business.impl.UserActionTJManageImpl">
+		<property name="userActionTJDAO" ref="UserActionTJDAO"></property>
+	</bean>
+	<!-- 用户分析 -->
+	<bean id="UserAnalysetyManage" class="com.ruicai.basis.tj.business.impl.UserAnalysetyManageImpl">
+		<property name="userAnalysetyDAO" ref="UserAnalysetyDAO"></property>
+	</bean>	
+	<!-- 业务管理 -->
+	<bean id="YwManage" class="com.ruicai.basis.yw.business.impl.YwManageImpl">
+		<property name="ywDAO" ref="YwDAO"></property>
+	</bean>
+	<!-- 渠道管理 -->
+	<bean id="ChannelManage" class="com.ruicai.basis.channel.business.impl.ChannelManageImpl">
+		<property name="channelDAO" ref="ChannelDAO"></property>
+	</bean>
+	<bean id="UserCfgManage" class="com.ruicai.basis.channel.business.impl.UserCfgManageImpl">
+		<property name="usercfgDAO" ref="UserCfgDAO"></property>
+	</bean>
+	<!-- 角色管理 -->
+	<bean id="RoleManage" class="com.ruicai.basis.sys.business.impl.RoleManageImpl">
+		<property name="roleDAO" ref="RoleDAO"></property>
+		<property name="roleCfgDAO" ref="RoleCfgDAO"></property>
+	</bean>
+	<!-- 红名单管理 -->
+	<bean id="RedTelManage" class="com.ruicai.basis.sys.business.impl.RedTelManageImpl">
+		<property name="redtelDAO" ref="RedTelDAO"></property>
+	</bean>
+	<!-- 用户信息查询 -->
+	<bean id="UserInfoManage" class="com.ruicai.basis.userinfo.business.impl.UserInfoManageImpl">
+		<property name="userInfoDAO" ref="UserInfoDAO"></property>
+	</bean>
+	<!-- pvcount -->
+	<bean id="PVCountManage" class="com.ruicai.basis.pv.business.impl.PVCountManageImpl">
+		<property name="pvCountDAO" ref="PVCountDAO"></property>
+	</bean>
+	<bean id="UserLogManage" class="com.ruicai.basis.pv.business.impl.UserLogManageImpl">
+		<property name="userLogDAO" ref="UserLogDAO"></property>
+	</bean>
+	
+	<!-- 图铃下载 -->
+	<bean id="PictureRingcountManage" class="com.ruicai.basis.tj.business.impl.PictureRingcountManageImpl">
+		<property name="pictureringcountDAO" ref="PictureRingcountDAO"></property>
+	</bean>	
+
+</beans>

@@ -1,0 +1,62 @@
+public List<WendaPHTJ> findWendaPHTJList(WendaPHTJ wendaPHTJ) {
+		Connection conn = getSession().connection();
+
+		List list_ = new ArrayList();
+		
+		List<WendaPHTJ> list = new ArrayList<WendaPHTJ>();
+		
+		WendaPHTJ wendaPHTJ_ = null;
+
+		RowSetDynaClass result = null;
+		PreparedStatement stat;
+		if (wendaPHTJ != null) {
+			try {
+				StringBuffer sql = new StringBuffer(
+						"SELECT qi,sum(socore) as socore ,tel,count(1) as num from game_socore where qi = "
+								+ wendaPHTJ.getQi()
+								+ " group by tel order by sum(socore) desc");
+
+				stat = conn.prepareStatement(sql.toString());
+
+				ResultSet res = stat.executeQuery();
+
+				result = new RowSetDynaClass(res);
+
+				list_ = result.getRows();
+				
+				for(int i=0;i<list_.size();i++){
+					
+					wendaPHTJ_ = new WendaPHTJ();
+					
+					BasicDynaBean basicdynaBean = (BasicDynaBean)list_.get(i);
+					
+					wendaPHTJ_.setQi((Integer)basicdynaBean.get("qi"));
+					wendaPHTJ_.setSocore(new Integer(basicdynaBean.get("socore").toString().trim()));
+					wendaPHTJ_.setTel(basicdynaBean.get("tel").toString());
+					wendaPHTJ_.setNum(new Integer(basicdynaBean.get("num").toString().trim()));
+					
+					list.add(wendaPHTJ_);
+				}
+
+			} catch (Exception e) {
+				log.error("findWendaPHTJList Error", e);
+			}
+		}
+
+		return list;
+	}
+	
+	
+	<c:forEach var="list" items="${list}" varStatus="it">
+							<tr>
+								<td>
+									${list.tel.toString()}
+								</td>
+								<td>
+									${list.province}
+								</td>
+								<td>
+									<script>document.write(GetNums(${list.num1},${list.num2},${list.num3}));</script>
+								</td>
+							</tr>
+						</c:forEach>

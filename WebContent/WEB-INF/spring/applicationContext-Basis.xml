@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- C3P0连接池 -->
+ 
+		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jrtstatis.db.driver}" />
+		<property name="url" value="${jrtstatis.db.url}" />
+		<property name="username" value="${jrtstatis.db.username}" />
+		<property name="password" value="${jrtstatis.db.password}" /> 
+	</bean>
+
+
+	<!-- Session工厂 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="mappingResources">
+			<list>
+				<!-- 添加POJO的####.hbm.xml文件 -->
+				<value>com/ruicai/basis/entity/User.hbm.xml</value>
+				<value>com/ruicai/basis/entity/PvTJ.hbm.xml</value>
+				<value>com/ruicai/basis/entity/PayTJ.hbm.xml</value>
+				<value>com/ruicai/basis/entity/BuyTJ.hbm.xml</value>
+				<value>com/ruicai/basis/entity/UserActionTJ.hbm.xml</value>
+				<value>com/ruicai/basis/entity/UserAnalysety.hbm.xml</value>
+				<value>com/ruicai/basis/entity/Menu.hbm.xml</value>
+				<value>com/ruicai/basis/entity/Yw.hbm.xml</value>
+				<value>com/ruicai/basis/entity/Channel.hbm.xml</value>
+				<value>com/ruicai/basis/entity/Role.hbm.xml</value>
+				<value>com/ruicai/basis/entity/RoleCfg.hbm.xml</value>
+				<value>com/ruicai/basis/entity/PVCount.hbm.xml</value>
+				<value>com/ruicai/basis/entity/UserCfg.hbm.xml</value>
+				<value>com/ruicai/basis/entity/RedTel.hbm.xml</value>
+				<value>com/ruicai/basis/entity/UserLog.hbm.xml</value>
+				<value>com/ruicai/basis/entity/TCooperat.hbm.xml</value>
+				<value>com/ruicai/basis/entity/Tlot.hbm.xml</value>
+				
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					<!-- org.hibernate.dialect.Oracle9Dialect org.hibernate.dialect.MySQLDialect -->
+					org.hibernate.dialect.Oracle9Dialect
+				</prop>
+				<prop key="hibernate.hbm2ddl.auto">none</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- Transaction manager for a single Hibernate SessionFactory (alter native 
+		to JTA) -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 定义事务拦截器bean -->
+	<bean id="transactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<!-- 事务拦截器bean需要依赖注入一个事务管理器 -->
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<!-- 下面定义事务传播属性 -->
+			<props>
+				<prop key="del*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="save*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="atta*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 定义一个BeanPostProcessor beanSpring提供BeanPostProcessor的实现类BeanNameAutoProxyCreator -->
+	<bean
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<!-- <bean id="autoproxy" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator"> -->
+		<!-- 指定对满足哪些bean name的bean自动生成业务代理 -->
+		<property name="beanNames">
+			<!-- 此处还可以列出更多的需要生成事务代理的目标bean -->
+			<!-- <ref local="personDAO"/> -->
+			<!-- 有一个需要生成事务代理的目标bean, 此处就增加一行 -->
+			<list>
+				<value>*Manage</value>
+				<value>*DAO</value>
+			</list>
+			<!-- <list> <value>CorpManage</value> <value>CorpDAO</value> </list> -->
+		</property>
+		<!-- 下面定义BeanNameAutoProxyCreator所需要的事务拦截器 -->
+		<property name="interceptorNames">
+			<list>
+				<value>transactionInterceptor</value>
+				<!-- 此处还增加其他新的Interceptor -->
+			</list>
+		</property>
+	</bean>
+
+	<bean
+		class="org.springframework.transaction.interceptor.TransactionAttributeSourceAdvisor">
+		<property name="transactionInterceptor" ref="transactionInterceptor">
+		</property>
+	</bean>
+
+	<bean id="SpringContextUtil" class="com.ruicai.basis.common.SpringContextUtil"
+		scope="singleton" lazy-init="false">
+	</bean>
+
+</beans>

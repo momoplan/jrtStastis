@@ -1,0 +1,105 @@
+一个可以替代Hibernate的轻量化解决方案
+从同学那里搞了这个简单轻量的BaseDAO，其他对象的DAO继承自这个类，再写几个能用到的方法即可，相当方便。终于可以抛弃Hibernate了！
+
+代码较长，请点击下面的链接查看全文！
+
+
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+import java.util.Properties;
+ 
+public abstract class BaseDAO {
+ 
+	protected Connection conn;
+	protected static String driverClass;
+	protected static String user;
+	protected static String url;
+	protected static String password;
+ 
+	static {
+		//从数据库配置文件导入配置参数
+		Properties p = new Properties();
+		try {
+			p.load(BaseDAO.class.getResourceAsStream("/dbconfig.properties"));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		driverClass = p.getProperty("driverClass");
+		user = p.getProperty("user");
+		url = p.getProperty("url");
+		password = p.getProperty("password");
+		//加载驱动类
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public BaseDAO(){
+		openConnection();
+	}
+ 
+	/**
+	 * 开启连接
+	 */
+	protected void openConnection(){
+		try {
+			conn = DriverManager.getConnection(url,user,password);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * 关闭连接
+	 */
+	public void closeConnection(){
+		if(conn!=null){
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+ 
+	}
+ 
+	protected void executeUpdate(String sql){
+		Statement stm = null;
+		try {
+			stm = conn.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try {
+			stm.execute(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+ 
+	}
+	protected ResultSet executeQuery(String sql){
+		Statement stm = null;
+		try {
+			stm = conn.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		ResultSet rs = null;
+		try {
+			rs = stm.executeQuery(sql);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		return rs;
+	}
+ 
+	@SuppressWarnings("unchecked")
+	protected abstract List resultSetToList(ResultSet rs);

@@ -1,0 +1,17 @@
+st=conn.PreparedStatement("insert into DailyCoal VALUES(?,?,?)"); 
+st.setString(1,dat); 
+st.setString(2,name); 
+st.setString(3,num); 
+
+String sql  = "select * from stuInfo where id = ? and name = ?";
+Object[] params = {id,name};
+public int executeSQL(String sql,Object[] params){
+  PreparedStatement psmt  =conn.prepareStatement(sql);
+  if(params != null){
+    for(int i = 0 ;i<params.length;i++){
+       psmt.setObject((i+1),params[i]);
+    }
+  }
+  
+ 
+} 

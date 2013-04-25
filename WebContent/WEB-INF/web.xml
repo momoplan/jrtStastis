@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/spring/applicationContext*.xml
+		</param-value>
+	</context-param>
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>
+			com.ruicai.basis.common.filter.EncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>landingFilter</filter-name>
+		<filter-class>
+			com.ruicai.basis.common.filter.LandingFilter
+		</filter-class>
+	</filter>	
+
+	<filter-mapping>
+		<filter-name>landingFilter</filter-name>
+		<url-pattern>/sys/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>landingFilter</filter-name>
+		<url-pattern>/channel/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>landingFilter</filter-name>
+		<url-pattern>/tj/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>landingFilter</filter-name>
+		<url-pattern>/userinfo/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>landingFilter</filter-name>
+		<url-pattern>/yewu/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>landingFilter</filter-name>
+		<url-pattern>/hezuo/*</url-pattern>
+	</filter-mapping>
+	
+	<filter>
+		<filter-name>accessFilter</filter-name>
+		<filter-class>
+			com.ruicai.basis.common.filter.AccessFilter
+		</filter-class>
+	</filter>	
+
+	<filter-mapping>
+		<filter-name>accessFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	   
+	<filter>
+		<filter-name>hibernateFilter</filter-name>
+		<filter-class>
+			org.springframework.orm.hibernate3.support.OpenSessionInViewFilter
+		</filter-class>
+	</filter>	
+		
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>	
+
+	<servlet>
+		<servlet-name>dispatcherServlet</servlet-name>
+		<servlet-class>
+			org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/classes/mvc-config.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>GetRandNum</servlet-name>
+		<servlet-class>com.ruicai.manage.login.servlet.GetRandNum</servlet-class>
+	</servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserLogServlet</servlet-name>
+    <servlet-class>com.ruicai.manage.pv.servlet.UserLogServlet</servlet-class>
+  </servlet>
+	
+	<servlet-mapping>
+		<servlet-name>GetRandNum</servlet-name>
+		<url-pattern>/getrandnum.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>dispatcherServlet</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserLogServlet</servlet-name>
+    <url-pattern>/pv/UserLogServlet</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
+  	<servlet-name>t3g</servlet-name>
+  	<servlet-class>com.ruicai.manage.sys.servlet.T3gServlet</servlet-class>
+  
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>t3g</servlet-name>
+  	<url-pattern>/t3g/countservlet</url-pattern>
+  </servlet-mapping>
+	<welcome-file-list>
+		<welcome-file>/index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

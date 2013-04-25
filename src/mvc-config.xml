@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+	<context:component-scan base-package="com.ruyicai" use-default-filters="false">
+		<context:include-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
+	</context:component-scan>
+	<!-- Turns on support for mapping requests to Spring MVC @Controller methods
+	     Also registers default Formatters and Validators for use across all @Controllers -->
+	<mvc:annotation-driven/>
+	
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.XmlViewResolver">
+		<property name="location">
+			<value>/WEB-INF/classes/views.xml</value>
+		</property>
+	</bean>	
+
+	<!-- index ACTION -->
+	<bean id="indexAction" class="com.ruicai.manage.login.action.IndexAction">
+		<property name="viewPage">
+			<value>index</value>
+		</property>
+		<property name="viewPage1">
+			<value>webmain</value>
+		</property>
+		<property name="viewPage2">
+			<value>leftframe</value>
+		</property>
+	</bean>	
+	<!-- webmain ACTION --> 
+	<bean id="webmainAction" class="com.ruicai.manage.login.action.WebMainAction">
+		<property name="viewPage">
+			<value>webmain</value>
+		</property>
+	</bean>	
+	<!-- pass ACTION --> 
+	<bean id="passAction" class="com.ruicai.manage.login.action.PassAction">
+		<property name="viewPage">
+			<value>findpass</value>
+		</property>
+	</bean>
+	<!-- pvtj ACTION -->
+	<bean id="pvTJAction" class="com.ruicai.manage.tj.action.PvTJAction">
+		<property name="viewPage">
+			<value>pvtj_all</value>
+		</property>
+	</bean>
+	<!-- paytj ACTION -->
+	<bean id="payTJAction" class="com.ruicai.manage.tj.action.PayTJAction">
+	</bean>
+	<!-- buytj ACTION -->
+	<bean id="buyTJAction" class="com.ruicai.manage.tj.action.BuyTJAction">
+		<property name="viewPage">
+			<value>buytj_all</value>
+		</property>
+	</bean>
+	<!-- clienttj ACTION -->
+	<bean id="clientZjlTJAction" class="com.ruicai.manage.tj.action.ClientTJAction">
+	</bean>
+	<!-- useractiontj ACTION -->
+	<bean id="userActionTJAction" class="com.ruicai.manage.tj.action.UserActionTJAction">
+		<property name="viewPage">
+			<value>useractiontj_all</value>
+		</property>
+	</bean>
+	<!-- useranalysety ACTION -->
+	<bean id="userAnalysetyAction" class="com.ruicai.manage.tj.action.UserAnalysetyAction">
+		<property name="viewPage">
+			<value>useranalysety_all</value>
+		</property>
+	</bean>
+	<!-- meun ACTION -->
+	<bean id="menuAction" class="com.ruicai.manage.sys.action.MenuAction">
+		<property name="viewPage">
+			<value>listmenu</value>
+		</property>
+		<property name="viewPage1">
+			<value>findmenu</value>
+		</property>
+	</bean>
+	<!-- yw ACTION -->
+	<bean id="ywAction" class="com.ruicai.manage.yw.action.YwAction">
+		<property name="viewPage">
+			<value>listyw</value>
+		</property>
+		<property name="viewPage1">
+			<value>findyw</value>
+		</property>
+	</bean>
+	<!-- channel ACTION -->
+	<bean id="channelAction" class="com.ruicai.manage.channel.action.ChannelAction">
+		<property name="viewPage">
+			<value>listchannel</value>
+		</property>
+		<property name="viewPage1">
+			<value>findchannel</value>
+		</property>
+		<property name="viewPage2">
+			<value>newchannel</value>
+		</property>
+		<property name="viewPage3">
+			<value>findchanneldetail</value>
+		</property>
+		<property name="viewPageCooperate">
+			<value>findCooperate</value>
+		</property>
+	</bean>
+	<bean id="usercfgAction" class="com.ruicai.manage.channel.action.UserCfgAction">
+		<property name="viewPage">
+			<value>listusercfg</value>
+		</property>
+		<property name="viewPage1">
+			<value>newusercfg</value>
+		</property>
+		<property name="viewPage2">
+			<value>findusercfg</value>
+		</property>
+	</bean>
+	<!-- role ACTION -->
+	<bean id="roleAction" class="com.ruicai.manage.sys.action.RoleAction">
+		<property name="viewPage">
+			<value>listrole</value>
+		</property>
+		<property name="viewPage1">
+			<value>findrole</value>
+		</property>
+		<property name="viewPage2">
+			<value>newrole</value>
+		</property>
+	</bean>
+	<!-- user ACTION -->
+	<bean id="userAction" class="com.ruicai.manage.sys.action.UserAction">
+		<property name="viewPage">
+			<value>listuser</value>
+		</property>
+		<property name="viewPage1">
+			<value>finduser</value>
+		</property>
+		<property name="viewPage2">
+			<value>newuser</value>
+		</property>
+	</bean>
+	<!-- user ACTION -->
+	<bean id="redtelAction" class="com.ruicai.manage.sys.action.RedTelAction">
+		<property name="viewPage">
+			<value>listredtel</value>
+		</property>
+		<property name="viewPage1">
+			<value>findredtel</value>
+		</property>
+		<property name="viewPage2">
+			<value>newredtel</value>
+		</property>
+	</bean>
+	<!-- userdt ACTION -->
+	<bean id="userdtAction" class="com.ruicai.manage.userinfo.action.UserdtAction">
+		<property name="viewPage">
+			<value>userdt</value>
+		</property>
+		<property name="viewPage1">
+			<value>usersn</value>
+		</property>
+	</bean>
+	<!-- pvcount ACTION -->
+	<bean id="pvCountAction" class="com.ruicai.manage.pv.action.PVCountAction">
+	   <property name="viewPage">
+			<value>pvlist</value>
+		</property>
+		<property name="viewPage1">
+			<value>userlist</value>
+		</property>
+	</bean>
+	<bean id="userLogAction" class="com.ruicai.manage.pv.action.UserLogAction">
+	   <property name="viewPage">
+			<value>userlog</value>
+		</property>
+	</bean>
+	<!-- 合作 ACTION -->
+	<bean id="hezuoAction" class="com.ruicai.manage.hezuo.action.HeZuoAction">
+	   <property name="viewPage">
+			<value>hzpvlist</value>
+	   </property>
+	   <property name="viewPage1">
+			<value>hzregnumlist</value>
+	   </property>
+	   <property name="viewPage2">
+			<value>buylist</value>
+	   </property>
+	</bean>	
+		
+	<!-- 图铃统计 ACTION -->
+	<bean id="pictureringcountAction" class="com.ruicai.manage.tj.action.PictureringcountAction">
+	   <property name="viewPage">
+			<value>pictureringlist</value>
+	   </property>
+	</bean>	
+</beans>

@@ -1,0 +1,361 @@
+<%@ page language="java" import="java.util.*" pageEncoding="gb2312"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="com.zhcw.sp.po.SpInfo"%>
+<%@ page import="com.zhcw.sp.po.ServiceInfo"%>
+<%@ page import="com.zhcw.sp.util.Page"%>
+<%@ page import="com.zhcw.sp.po.mt.ByMessage"%>
+
+<%    
+	String spname = request.getAttribute("spname").toString();
+	String serviceid = request.getAttribute("serviceid").toString();	
+	Page pagemodel = (Page) request.getAttribute("pagemodel");	
+	ByMessage bymsg = (ByMessage)request.getAttribute("bymsg");    
+    ArrayList<ByMessage> msglist = (ArrayList<ByMessage>) request.getAttribute("msglist");    
+%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+	<head>
+		<title>短信资讯增加</title>
+		<style type="text/css"></style>
+		<link href="../css/css.css" rel="stylesheet" type="text/css" />
+		<script language="javascript" type="text/javascript"
+			src="../js/common.js"></script>
+		<link href="../css/calendar-win2k-1.css" rel="stylesheet" />
+		<script type="text/javascript" src="../js/calendar.js"></script>
+		<script type="text/javascript" src="../js/calendar-en.js"></script>
+		<script type="text/javascript" src="../js/calendar-setup.js"></script>
+		<script language="JavaScript" type="text/javascript"
+			src="../js/My97DatePicker/WdatePicker.js"></script>
+
+<script language="javascript" type="text/javascript">
+<!--
+
+var childmenu = new Array(
+   ['001','262','CPA-彩民俱乐部之足彩绝杀']
+);
+
+function changesp()
+{
+  var slv = document.getElementById("spname").value;
+  document.getElementById("serviceid").options.length = 0; 
+  
+  slct=document.createElement("Option");
+  slct.value="";
+  slct.text="---请选择---";
+  document.getElementById("serviceid").add(slct);
+    
+  for(i=0;i<childmenu.length;i++)
+  {       
+    if (childmenu[i][0] == slv)
+    {
+      //alert(childmenu[i][0] + '  ' + childmenu[i][1] + '  ' + slv);
+      slct=document.createElement("Option");
+      slct.value=childmenu[i][1];
+      slct.text=childmenu[i][2];
+      document.getElementById("serviceid").add(slct);
+    }
+ }
+}
+
+function init()
+{
+var spname = '<%=spname%>';
+var serviceid = '<%=serviceid%>';
+
+if(spname != ''){
+   document.getElementById("spname").value = spname;
+   changesp();
+   document.getElementById("serviceid").value = serviceid;
+}
+}
+
+function fsubmit(){
+   //document.forms.item("form1").submit();
+   //form1.submit();
+   document.getElementById("msgid").value = "";
+   document.forms[0].submit();
+   //alert("wer");
+}
+
+function formSubmit(num){
+   document.getElementById("pageid").value = num;
+   document.form1.submit();
+}
+
+function savadate(){
+   var obj_serviceid = document.getElementById("serviceid");
+   var obj_content = document.getElementById("content");
+   //alert(obj.options[obj.selectedIndex].text);
+   if(obj_serviceid.value == ''){
+      alert('请选择业务类别!');
+   }else if(obj_content.value == ''){
+      alert('请输入内容!');
+   }else {     
+      document.getElementById("type").value = "save";
+      document.form1.submit();
+   }   
+}
+
+function deldate(src){
+  var as = confirm("确定要删除吗?一旦删除将不能恢复!");
+  if(as){location.href=src;
+  }
+}
+
+//-->
+</script>
+	</head>
+	<body style="text-align:center;" onLoad="init();">
+		<form name="form1" action="jcbymt.do" method="post">
+            <input type="hidden" name="msgid" value='<%=bymsg.getMsgid() %>'>
+            <input type="hidden" name="type" value=''>
+			<table border="0" cellspacing="0" cellpadding="0" width="100%"
+				class="lable_icon_bg">
+				<tr>
+					<td class="head_top">
+						当前位置：下发产品维护
+						<img src="../images/icon_arrow_right02.gif" width="17" height="13"
+							align="absmiddle">
+						包月下发信息
+					</td>
+				</tr>
+
+				<tr>
+
+					<td valign="top">
+						<!-- 查询条件 begin -->
+						<table width="100%" border="0" cellspacing="3" cellpadding="0">
+							<tr>
+								<td>
+									<table width="100%" border="0" cellspacing="0" cellpadding="0"
+										class="search_style">
+										<tr onClick="searchChangeStyle(this)" class="search_style_up">
+											<th>
+												<img src="../images/icon_search.gif" width="28" height="21"
+													align="absmiddle" />
+												查询
+											</th>
+										</tr>
+										<tr style="display:block" id="findmx">
+											<td style="padding:5px;">
+
+												<table width="100%" border="0" cellpadding="0"
+													cellspacing="0" class="search_inner">
+
+													<tr>
+														<td align="right" width="100">
+															玩法：
+														</td>
+														<td width="300">
+															<select name="spname" id="spname" class="input_text_long"
+																onchange="changesp()">
+
+																<option value="">
+																	---请选择---
+																</option>
+																<option value="001">
+																	体彩业务
+																</option>
+															</select>														 
+														</td>
+														<td align="right" width="100">
+															业务类别：
+														</td>
+														<td>
+															<select name="serviceid" id="serviceid"
+																class="input_text_long" onChange="fsubmit();">
+																<option value="">
+																	---请选择---
+																</option>
+															</select>
+														</td>
+													</tr>
+
+													<tr>
+														<td height="70" align="right">
+															内容：
+														</td>
+														<td colspan="3">
+														    
+															<textarea name="content" id="content" OnPropertyChange="if(this.value.length <= 70){msgNum1.value = 70 - this.value.length;} else {this.value = this.value.substr(0,70);}"
+															   style="height:60px;width:610px;"><%=bymsg.getContent() %></textarea>
+															<input name="msgNum1" type="text" id="msgNum1" value="<%=70-bymsg.getContent().length() %>" readonly="" style="font-size: 10pt; width: 20px" />
+														</td>
+													</tr>
+
+													<tr>
+														<td height="30" align="right">
+														</td>
+														<td>
+															<input type="button" name="bt_add" value="保存"	class="button_normal" onClick="savadate()" />															
+														</td>
+														<td>
+														</td>
+														<td>
+														</td>
+													</tr>
+												</table>
+
+											</td>
+										</tr>
+
+									</table>
+								</td>
+							</tr>
+
+						</table>
+						<!-- 查询条件 end -->
+
+						<!-- 查询结果 begin -->
+						<table width="100%">
+							<tr>
+								<td align="left" width="100%">
+									<div>
+										<table cellspacing="0" cellpadding="0" rules="all"
+											class="listStyle" border="1" id="UserGV"
+											style="border-collapse:collapse;">
+											<tr>
+												<th scope="col" style="width:60px;">
+													序号
+												</th>
+												<th scope="col" style="width:15%;">
+													业务名称
+												</th>												
+
+												<th scope="col" style="width:10%;">
+													录入时间
+												</th>
+												<th scope="col">
+													发送内容
+												</th>												
+
+												<th scope="col" style="width:90px;">
+													操作
+												</th>
+											</tr>
+											
+											
+											<%
+												Iterator msgit = msglist.iterator();
+												int k = 0;
+												while (msgit.hasNext()) {
+													ByMessage model = (ByMessage) msgit.next();
+													++k;
+											%>
+
+											<%
+											if (k % 2 == 0) {
+											%>
+											<tr class="tb_tr" style="background-color:#DDEAFF;">
+												<%
+												} else {
+												%>
+											
+											<tr class="tb_tr">
+												<%
+												}
+												%>
+
+												<td>
+													<%=(pagemodel.getCurrentPage()-1)*pagemodel.getEveryPage()+k%>
+												</td>
+												<td>
+													<%=model.getBusinessname()%>
+												</td>
+												
+												<td>
+													<%=model.getCreattime()%>
+												</td>
+												<td style="text-align:left" >
+													<%=model.getContent()%>
+												</td>
+
+												<td>
+												    <a href="jcbymt.do?msgid=0&spname=<%=spname %>&serviceid=<%=serviceid %>&pageid=<%=pagemodel.getCurrentPage()%>">添加</a>
+													<a href="jcbymt.do?msgid=<%=model.getMsgid()%>&spname=<%=spname %>&serviceid=<%=serviceid %>&pageid=<%=pagemodel.getCurrentPage()%>">编辑</a>
+													<a href="javascript:deldate('jcbymt.do?msgid=<%=model.getMsgid()%>&spname=<%=spname %>&serviceid=<%=serviceid %>&pageid=<%=pagemodel.getCurrentPage()%>&type=del');">删除</a>
+												</td>												
+
+											</tr>
+
+
+											<%
+											}
+											%>
+
+											
+
+										</table>
+
+									</div>
+									
+									<!------------------------------ JspDatePager Start ------------------------------>
+									<table width="100%" height="28" border="0" align="center"
+										cellpadding="0" cellspacing="0">
+										<tr bgcolor="EFF3F7" height=28>
+											<td height="30" align="center">
+												<input type="hidden" name="pageid" value=''>
+												共
+												<font color="red"><b><%=pagemodel.getTotalnum()%>
+												</b> </font>条记录&nbsp;&nbsp;分<FONT color="red"><B><%=pagemodel.getTotalPage()%>
+												</B> </FONT>页显示&nbsp;当前为第
+												<FONT color="red"><B><%=pagemodel.getCurrentPage()%>
+												</B> </FONT>页 &nbsp;
+
+												<%
+												if (pagemodel.getCurrentPage() == 1) {
+												%>
+												[首页] 上一页
+												<%
+												} else {
+												%>
+												<a href='javascript:formSubmit(0)'>[首页] </a>
+												<a
+													href='javascript:formSubmit(<%=pagemodel.getCurrentPage() - 1%>)'>上一页
+												</a>
+												<%
+												}
+												%>
+
+
+												<%
+												if (pagemodel.getCurrentPage() == pagemodel.getTotalPage()) {
+												%>
+												下一页 [尾页]
+												<%
+												} else {
+												%>
+												<a
+													href='javascript:formSubmit(<%=pagemodel.getCurrentPage() + 1%>)'>下一页
+												</a>
+												<a
+													href='javascript:formSubmit(<%=pagemodel.getTotalPage()%>)'>[尾页]</a>
+												<%
+												}
+												%>
+
+
+
+												&nbsp;&nbsp;&nbsp;&nbsp;
+												<input type="text" name="page_in" size="3"
+													value='<%=pagemodel.getCurrentPage()%>' />
+												<a
+													href='javascript:formSubmit(document.forms[0].page_in.value)'>GO</a>
+											</td>
+										</tr>
+									</table>
+									<!------------------------------- JspDatePager end -------------------------------->
+									
+								</td>
+							</tr>
+						</table>
+						<!-- 查询结果 end -->
+
+					</td>
+				</tr>
+			</table>
+
+        </form>		
+	</body>
+</html>
